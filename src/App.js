@@ -32,13 +32,17 @@ export default function App() {
   function selectLetter(e) {
     const letter = e.target.innerText.toLowerCase();
     const newArr = word.split("");
+    let found = false;
     for (let i = 0; i < currentWord.length; i++) {
-      if (wordNormalized[i] === letter) newArr[i] = currentWord[i];
+      if (wordNormalized[i] === letter) {
+        newArr[i] = currentWord[i];
+        found = true;
+      }
     }
 
     setWord(newArr.join(""));
     setPressed(pressed.map(e => e === letter ? false : e));
-    playsCount++;
+    if (!found) playsCount++;
 
     if (playsCount > 5) {
       setWord(currentWord);
