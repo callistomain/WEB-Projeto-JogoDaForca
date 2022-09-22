@@ -5,7 +5,7 @@ export default function Keyboard(props) {
     <Style>
       {props.word && !props.gameOver
         ? props.alfabeto.map((e, i) => props.pressed[i]
-          ? <Letter key={i} onClick={props.selectLetter} data-identifier="letter">{e.toUpperCase()}</Letter>
+          ? <Letter key={i} onClick={() => props.selectLetter(i)} data-identifier="letter">{e.toUpperCase()}</Letter>
           : <LetterDisabled key={i} data-identifier="letter">{e.toUpperCase()}</LetterDisabled>
         )
         : props.alfabeto.map((e, i) => <LetterDisabled key={i} data-identifier="letter">{e.toUpperCase()}</LetterDisabled>)

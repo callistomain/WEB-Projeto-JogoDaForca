@@ -24,13 +24,14 @@ export default function App() {
     wordNormalized = currentWord.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
     playsCount = 0;
     gameOver = false;
+    console.log(currentWord);
 
     setWord(currentWord.split("").map(e => "_").join(""));
     setPressed([...alfabeto]);
   }
 
-  function selectLetter(e) {
-    const letter = e.target.innerText.toLowerCase();
+  function selectLetter(index) {
+    const letter = alfabeto[index];
     const newArr = word.split("");
     let found = false;
     for (let i = 0; i < currentWord.length; i++) {
@@ -40,8 +41,14 @@ export default function App() {
       }
     }
 
-    setWord(newArr.join(""));
-    setPressed(pressed.map(e => e === letter ? false : e));
+    const newWord = newArr.join("");
+    setWord(newWord);
+    if (newWord === currentWord) {
+      gameOver = true;
+      return;
+    }
+    const newPressed = [...pressed]; newPressed[index] = false;
+    setPressed(newPressed);
     if (!found) playsCount++;
 
     if (playsCount > 5) {
@@ -54,7 +61,7 @@ export default function App() {
     const input = e.target[0];
     e.preventDefault();
 
-    if (input.value !== wordNormalized) playsCount = 6;
+    if (input.value !== wordNormalized && input.value !== currentWord) playsCount = 6;
     input.value = "";
     
     setWord(currentWord);
