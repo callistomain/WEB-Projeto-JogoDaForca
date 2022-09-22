@@ -58,9 +58,10 @@ export default function App() {
 
   function guessWord(e) {
     const input = e.target[0];
+    const inputWord = input.value.toLowerCase();
     e.preventDefault();
 
-    if (input.value !== wordNormalized && input.value !== currentWord) playsCount = 6;
+    if (inputWord !== wordNormalized && inputWord !== currentWord) playsCount = 6;
     input.value = "";
     
     setWord(currentWord);
