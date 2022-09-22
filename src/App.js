@@ -24,7 +24,6 @@ export default function App() {
     wordNormalized = currentWord.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
     playsCount = 0;
     gameOver = false;
-    console.log(currentWord);
 
     setWord(currentWord.split("").map(e => "_").join(""));
     setPressed([...alfabeto]);
